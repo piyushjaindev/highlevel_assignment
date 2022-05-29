@@ -4,7 +4,7 @@ import 'package:highlevel_assignment/models/task_model.dart';
 import 'package:highlevel_assignment/utils/constants.dart';
 import 'package:provider/provider.dart';
 
-import '../stores/tasks_store.dart';
+import '../states/tasks_list_state.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         id: DateTime.now().millisecondsSinceEpoch.toString(),
       );
 
-      context.read<TasksStore>().addNewTask(task);
+      context.read<TasksListState>().addNewTask(task);
 
       Navigator.pop(context);
     }

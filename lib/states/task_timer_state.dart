@@ -4,16 +4,16 @@ import 'package:mobx/mobx.dart';
 
 import '../models/task_model.dart';
 
-part 'task_timer_store.g.dart';
+part 'task_timer_state.g.dart';
 
-class TaskTimerStore extends _TaskTimerStore with _$TaskTimerStore {
-  TaskTimerStore(TaskModel task) : super(task);
+class TaskTimerState extends _TaskTimerState with _$TaskTimerState {
+  TaskTimerState(super.task);
 }
 
-abstract class _TaskTimerStore with Store {
+abstract class _TaskTimerState with Store {
   final TaskModel task;
 
-  _TaskTimerStore(this.task) {
+  _TaskTimerState(this.task) {
     timerInSeconds = task.duration.inSeconds;
   }
 

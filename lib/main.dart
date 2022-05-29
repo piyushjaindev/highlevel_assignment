@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/tasks_screen.dart';
-import 'stores/tasks_store.dart';
+import 'states/tasks_list_state.dart';
 import 'utils/app_theme.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (_) => TasksStore(),
+      create: (_) => TasksListState(),
       child: MaterialApp(
         title: 'Potato Timer',
         theme: AppTheme.theme,

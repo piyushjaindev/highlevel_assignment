@@ -1,14 +1,14 @@
 import 'package:mobx/mobx.dart';
 
 import '../models/task_model.dart';
-import 'task_timer_store.dart';
+import 'task_timer_state.dart';
 
-part 'tasks_store.g.dart';
+part 'tasks_list_state.g.dart';
 
-class TasksStore = _TasksStore with _$TasksStore;
+class TasksListState = _TasksListState with _$TasksListState;
 
-abstract class _TasksStore with Store {
-  List<TaskTimerStore> taskTimerStores = [];
+abstract class _TasksListState with Store {
+  List<TaskTimerState> taskTimerStores = [];
 
   @observable
   ObservableList<TaskModel> activeTasks = ObservableList<TaskModel>();
@@ -22,7 +22,7 @@ abstract class _TasksStore with Store {
   @action
   void addNewTask(final TaskModel task) {
     activeTasks.add(task);
-    taskTimerStores.add(TaskTimerStore(task));
+    taskTimerStores.add(TaskTimerState(task));
   }
 
   @action

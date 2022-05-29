@@ -102,6 +102,7 @@ class AppTheme {
   );
 
   static ThemeData theme = ThemeData.light().copyWith(
+    useMaterial3: true,
     primaryColor: _primaryColor,
     canvasColor: _canvasColor,
     textTheme: _textTheme,

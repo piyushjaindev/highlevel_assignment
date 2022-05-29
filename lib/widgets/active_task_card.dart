@@ -6,8 +6,8 @@ import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 import '../models/task_model.dart';
-import '../stores/task_timer_store.dart';
-import '../stores/tasks_store.dart';
+import '../states/task_timer_state.dart';
+import '../states/tasks_list_state.dart';
 
 class ActiveTaskCard extends StatefulWidget {
   const ActiveTaskCard({Key? key, required this.task}) : super(key: key);
@@ -19,8 +19,8 @@ class ActiveTaskCard extends StatefulWidget {
 }
 
 class _ActiveTaskCardState extends State<ActiveTaskCard> {
-  late final TaskTimerStore _taskTimerStore = context.read<TaskTimerStore>();
-  late final TasksStore _tasksStore = context.read<TasksStore>();
+  late final TaskTimerState _taskTimerState = context.read<TaskTimerState>();
+  late final TasksListState _tasksListState = context.read<TasksListState>();
 
   late final ReactionDisposer _disposer;
 
@@ -28,8 +28,8 @@ class _ActiveTaskCardState extends State<ActiveTaskCard> {
   void initState() {
     super.initState();
     _disposer = autorun((_) {
-      if (_taskTimerStore.timerInSeconds == 0) {
-        _tasksStore.markTaskComplete(widget.task);
+      if (_taskTimerState.timerInSeconds == 0) {
+        _tasksListState.markTaskComplete(widget.task);
       }
     });
   }
@@ -63,26 +63,26 @@ class _ActiveTaskCardState extends State<ActiveTaskCard> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      _taskTimerStore.timerString,
+                      _taskTimerState.timerString,
                       style: Theme.of(context).textTheme.headline4!.copyWith(
                             color: Theme.of(context).primaryColor,
                           ),
                     ),
                     const SizedBox(width: 8),
                     _buildIconButtonContainer(
-                      icon: _taskTimerStore.isTimerRunning
+                      icon: _taskTimerState.isTimerRunning
                           ? Icons.pause
                           : Icons.play_arrow,
-                      onTap: _taskTimerStore.isTimerRunning
-                          ? _taskTimerStore.pauseTimer
-                          : _taskTimerStore.startTimer,
+                      onTap: _taskTimerState.isTimerRunning
+                          ? _taskTimerState.pauseTimer
+                          : _taskTimerState.startTimer,
                     ),
                     const SizedBox(width: 8),
                     _buildIconButtonContainer(
                       icon: Icons.stop,
                       onTap: () {
-                        _taskTimerStore.pauseTimer();
-                        _tasksStore.dismissTask(widget.task);
+                        _taskTimerState.pauseTimer();
+                        _tasksListState.dismissTask(widget.task);
                       },
                     ),
                   ],

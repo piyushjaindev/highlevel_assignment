@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../models/task_model.dart';
-import '../stores/tasks_store.dart';
+import '../states/tasks_list_state.dart';
 
 class CompletedTaskCard extends StatelessWidget {
   const CompletedTaskCard({Key? key, required this.task}) : super(key: key);
@@ -75,7 +75,7 @@ class CompletedTaskCard extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                context.read<TasksStore>().dismissTask(task);
+                context.read<TasksListState>().dismissTask(task);
               },
               child: const Text('MARK COMPLETE'),
               style: ElevatedButton.styleFrom(
