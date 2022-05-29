@@ -76,6 +76,9 @@ class _ActiveTaskCardState extends State<ActiveTaskCard> {
                       onTap: _taskTimerState.isTimerRunning
                           ? _taskTimerState.pauseTimer
                           : _taskTimerState.startTimer,
+                      key: _taskTimerState.isTimerRunning
+                          ? const ValueKey('pause')
+                          : const ValueKey('play'),
                     ),
                     const SizedBox(width: 8),
                     _buildIconButtonContainer(
@@ -112,7 +115,7 @@ class _ActiveTaskCardState extends State<ActiveTaskCard> {
   }
 
   Widget _buildIconButtonContainer(
-      {required IconData icon, required VoidCallback onTap}) {
+      {required IconData icon, required VoidCallback onTap, Key? key}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -127,6 +130,7 @@ class _ActiveTaskCardState extends State<ActiveTaskCard> {
           icon,
           size: 18,
           color: Colors.white,
+          key: key,
         ),
       ),
     );
