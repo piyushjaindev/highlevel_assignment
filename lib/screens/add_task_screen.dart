@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:highlevel_assignment/models/task_model.dart';
 import 'package:highlevel_assignment/utils/constants.dart';
+import 'package:provider/provider.dart';
+
+import '../stores/tasks_store.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
@@ -12,13 +16,24 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  late String _taskName, _taskDescription;
+  late String _taskTitle, _taskDescription;
   late Duration _duration;
 
   void _validateAndAddTask() {
     FocusScope.of(context).unfocus();
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      final task = TaskModel(
+        title: _taskTitle,
+        description: _taskDescription,
+        duration: _duration,
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+      );
+
+      context.read<TasksStore>().addNewTask(task);
+
+      Navigator.pop(context);
     }
   }
 
@@ -75,12 +90,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            style: const TextStyle(color: Colors.black),
             onSaved: (value) {
-              _taskName = value!.trim();
+              _taskTitle = value!.trim();
             },
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
-                return 'Please enter a task name';
+                return 'Please enter a task title';
               }
               return null;
             },
@@ -93,6 +109,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           TextFormField(
             minLines: 5,
             maxLines: 5,
+            style: const TextStyle(color: Colors.black),
             onSaved: (value) {
               _taskDescription = value!.trim();
             },

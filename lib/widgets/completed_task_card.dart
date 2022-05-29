@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../models/task_model.dart';
+import '../stores/tasks_store.dart';
 
 class CompletedTaskCard extends StatelessWidget {
-  const CompletedTaskCard({Key? key}) : super(key: key);
+  const CompletedTaskCard({Key? key, required this.task}) : super(key: key);
+
+  final TaskModel task;
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +54,14 @@ class CompletedTaskCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 11),
                     Text(
-                      'Egg boiling',
+                      task.title,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: Text(
-                          'Need to take out the egg from the boiler when this timer ends',
+                          task.description,
                           style:
                               Theme.of(context).textTheme.bodyText2!.copyWith(
                                     color: Theme.of(context).primaryColor,
@@ -68,7 +74,9 @@ class CompletedTaskCard extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<TasksStore>().dismissTask(task);
+              },
               child: const Text('MARK COMPLETE'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
