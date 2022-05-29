@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/tasks_screen.dart';
+import 'services/local_storage_service.dart';
+import 'services/service_locator.dart';
 import 'states/tasks_list_state.dart';
 import 'utils/app_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupGetIt();
+  await getIt<LocalStorageService>().init();
+
   runApp(const MyApp());
 }
 
@@ -14,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return Provider<TasksListState>(
       create: (_) => TasksListState(),
       child: MaterialApp(
         title: 'Potato Timer',

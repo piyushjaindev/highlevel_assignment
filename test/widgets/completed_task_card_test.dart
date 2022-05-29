@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:highlevel_assignment/services/local_storage_service.dart';
 import 'package:highlevel_assignment/states/tasks_list_state.dart';
 import 'package:highlevel_assignment/widgets/completed_task_card.dart';
 import 'package:provider/provider.dart';
 
 import '../data/tasks_data.dart';
+import '../services/service_locator.dart';
 
 void main() {
   late TasksListState _state;
 
-  setUp(() {
+  setUp(() async {
+    setupGetIt();
+    await getIt<LocalStorageService>().init();
     _state = TasksListState();
   });
 

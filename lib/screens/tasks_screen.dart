@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 import '../states/tasks_list_state.dart';
@@ -23,7 +25,7 @@ class TasksScreen extends StatelessWidget {
       ),
       body: Observer(
         builder: (context) {
-          return tasksListState.isEmpty
+          return tasksListState.hasNoTasks
               ? const NoTaskScreen()
               : CustomScrollView(
                   slivers: [
@@ -35,7 +37,7 @@ class TasksScreen extends StatelessWidget {
                         childCount: tasksListState.completedTasks.length,
                       ),
                     ),
-                    if (!tasksListState.isEmpty)
+                    if (!tasksListState.hasNoTasks)
                       const SliverToBoxAdapter(
                         child: SizedBox(height: 25),
                       ),

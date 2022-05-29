@@ -16,9 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskModel {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get description => throw _privateConstructorUsedError;
+  @HiveField(3)
   Duration get duration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +34,11 @@ mixin _$TaskModel {
 abstract class $TaskModelCopyWith<$Res> {
   factory $TaskModelCopyWith(TaskModel value, $Res Function(TaskModel) then) =
       _$TaskModelCopyWithImpl<$Res>;
-  $Res call({String id, String title, String description, Duration duration});
+  $Res call(
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String description,
+      @HiveField(3) Duration duration});
 }
 
 /// @nodoc
@@ -75,7 +83,11 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
           _$_TaskModel value, $Res Function(_$_TaskModel) then) =
       __$$_TaskModelCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String title, String description, Duration duration});
+  $Res call(
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String description,
+      @HiveField(3) Duration duration});
 }
 
 /// @nodoc
@@ -118,20 +130,25 @@ class __$$_TaskModelCopyWithImpl<$Res> extends _$TaskModelCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 1, adapterName: 'TaskModelAdapter')
 class _$_TaskModel implements _TaskModel {
   const _$_TaskModel(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.duration});
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.title,
+      @HiveField(2) required this.description,
+      @HiveField(3) required this.duration});
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String title;
   @override
+  @HiveField(2)
   final String description;
   @override
+  @HiveField(3)
   final Duration duration;
 
   @override
@@ -167,18 +184,22 @@ class _$_TaskModel implements _TaskModel {
 
 abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
-      {required final String id,
-      required final String title,
-      required final String description,
-      required final Duration duration}) = _$_TaskModel;
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String title,
+      @HiveField(2) required final String description,
+      @HiveField(3) required final Duration duration}) = _$_TaskModel;
 
   @override
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
   @override
+  @HiveField(2)
   String get description => throw _privateConstructorUsedError;
   @override
+  @HiveField(3)
   Duration get duration => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
